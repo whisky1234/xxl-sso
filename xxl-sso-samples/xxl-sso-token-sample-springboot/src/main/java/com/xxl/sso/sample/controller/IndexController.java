@@ -22,4 +22,18 @@ public class IndexController {
         return new ReturnT<XxlSsoUser>(xxlUser);
     }
 
+    @RequestMapping("/open")
+    @ResponseBody
+    public ReturnT<XxlSsoUser> open(HttpServletRequest request) {
+        XxlSsoUser xxlUser = (XxlSsoUser) request.getAttribute(Conf.SSO_USER);
+        return new ReturnT<XxlSsoUser>(xxlUser);
+    }
+
+    @RequestMapping("/common/1")
+    @ResponseBody
+    public ReturnT<XxlSsoUser> common(HttpServletRequest request) {
+        XxlSsoUser xxlUser = (XxlSsoUser) request.getAttribute(Conf.SSO_USER);
+        return new ReturnT<XxlSsoUser>(xxlUser);
+    }
+
 }

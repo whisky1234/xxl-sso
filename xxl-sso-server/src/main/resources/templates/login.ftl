@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>统一认证中心</title>
+    <title>百昌统一认证中心</title>
 
     <#import "common/common.macro.ftl" as netCommon>
     <@netCommon.commonStyle />
@@ -13,11 +13,11 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <a><b>XXL</b>SSO</a>
+            <a><b>百昌用户认证中心</b></a>
         </div>
         <form action="${request.contextPath}/doLogin">
             <div class="login-box-body">
-                <p class="login-box-msg">统一认证中心</p>
+                <#--<p class="login-box-msg">统一认证中心</p>-->
                 <div class="form-group has-feedback">
                     <input type="text" name="username" class="form-control" placeholder="Please input username." value="user" maxlength="50" >
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

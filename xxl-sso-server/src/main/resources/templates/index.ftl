@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>统一认证中心</title>
+    <title>百昌统一认证中心</title>
 
     <#import "common/common.macro.ftl" as netCommon>
     <@netCommon.commonStyle />
