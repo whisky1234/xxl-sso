@@ -3,7 +3,7 @@ package com.xxl.sso.core.filter;
 import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.login.SsoWebLoginHelper;
 import com.xxl.sso.core.path.impl.AntPathMatcher;
-import com.xxl.sso.core.user.XxlSsoUser;
+import com.xxl.sso.core.user.SsoUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +76,7 @@ public class XxlSsoWebFilter extends HttpServlet implements Filter {
         }
 
         // valid login user, cookie + redirect
-        XxlSsoUser xxlUser = SsoWebLoginHelper.loginCheck(req, res);
+        SsoUser xxlUser = SsoWebLoginHelper.loginCheck(req, res);
 
         // valid login fail
         if (xxlUser == null) {

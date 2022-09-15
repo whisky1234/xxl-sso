@@ -1,6 +1,6 @@
 package com.xxl.sso.core.store;
 
-import com.xxl.sso.core.user.XxlSsoUser;
+import com.xxl.sso.core.user.SsoUser;
 
 /**
  * make client sessionId
@@ -21,11 +21,11 @@ public class SsoSessionIdHelper {
     /**
      * make client sessionId
      *
-     * @param xxlSsoUser
+     * @param ssoUser
      * @return
      */
-    public static String makeSessionId(XxlSsoUser xxlSsoUser){
-        String sessionId = xxlSsoUser.getUserid().concat("_").concat(xxlSsoUser.getVersion());
+    public static String makeSessionId(SsoUser ssoUser){
+        String sessionId = ssoUser.getUserId().concat("_").concat(ssoUser.getVersion());
         return sessionId;
     }
 

@@ -8,26 +8,26 @@ import java.util.Map;
  *
  * @author xuxueli 2018-04-02 19:59:49
  */
-public class XxlSsoUser implements Serializable {
+public class SsoUser implements Serializable {
     private static final long serialVersionUID = 42L;
 
     // field
-    private String userid;
-    private String username;
-    private Map<String, String> plugininfo;
+    private String              userId;
+    private String              username;
+    private Map<String, String> pluginInfo;
 
     private String version;
-    private int expireMinute;
-    private long expireFreshTime;
+    private int    expireMinute;
+    private long   expireFreshTime;
 
 
     // set get
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -38,12 +38,12 @@ public class XxlSsoUser implements Serializable {
         this.username = username;
     }
 
-    public Map<String, String> getPlugininfo() {
-        return plugininfo;
+    public Map<String, String> getPluginInfo() {
+        return pluginInfo;
     }
 
-    public void setPlugininfo(Map<String, String> plugininfo) {
-        this.plugininfo = plugininfo;
+    public void setPluginInfo(Map<String, String> pluginInfo) {
+        this.pluginInfo = pluginInfo;
     }
 
     public String getVersion() {

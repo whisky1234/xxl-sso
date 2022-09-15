@@ -58,7 +58,7 @@ public class TokenClientTest {
 	private void clientApiRequestTest(String clientApiUrl, String sessionId) throws IOException {
 
 		Map<String, String> headerParam = new HashMap<>();
-		headerParam.put(Conf.SSO_SESSIONID, sessionId);
+		headerParam.put(Conf.SSO_SESSION_ID, sessionId);
 
 
 		String resultJson = HttpClientUtil.post(clientApiUrl, null, headerParam);

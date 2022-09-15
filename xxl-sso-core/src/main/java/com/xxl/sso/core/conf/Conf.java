@@ -12,7 +12,7 @@ public class Conf {
     /**
      * sso sessionid, between browser and sso-server (web + token client)
      */
-    public static final String SSO_SESSIONID = "xxl_sso_sessionid";
+    public static final String SSO_SESSION_ID = "bc_sso_sessionId";
 
 
     /**
@@ -23,8 +23,7 @@ public class Conf {
     /**
      * sso user, request attribute (web client)
      */
-    public static final String SSO_USER = "xxl_sso_user";
-
+    public static final String SSO_USER = "bc_sso_user";
 
     /**
      * sso server address (web + token client)
@@ -34,7 +33,7 @@ public class Conf {
     /**
      * login url, server relative path (web client)
      */
-    public static final String SSO_LOGIN = "/login";
+    public static final String SSO_LOGIN  = "/login";
     /**
      * logout url, server relative path (web client)
      */

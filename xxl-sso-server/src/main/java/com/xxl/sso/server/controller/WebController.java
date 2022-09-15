@@ -3,7 +3,7 @@ package com.xxl.sso.server.controller;
 import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.login.SsoWebLoginHelper;
 import com.xxl.sso.core.store.SsoLoginStore;
-import com.xxl.sso.core.user.XxlSsoUser;
+import com.xxl.sso.core.user.SsoUser;
 import com.xxl.sso.core.store.SsoSessionIdHelper;
 import com.xxl.sso.server.core.model.UserInfo;
 import com.xxl.sso.server.core.result.ReturnT;
@@ -33,7 +33,7 @@ public class WebController {
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
 
         // login check
-        XxlSsoUser xxlUser = SsoWebLoginHelper.loginCheck(request, response);
+        SsoUser xxlUser = SsoWebLoginHelper.loginCheck(request, response);
 
         if (xxlUser == null) {
             return "redirect:/login";
@@ -54,7 +54,7 @@ public class WebController {
     public String login(Model model, HttpServletRequest request, HttpServletResponse response) {
 
         // login check
-        XxlSsoUser xxlUser = SsoWebLoginHelper.loginCheck(request, response);
+        SsoUser xxlUser = SsoWebLoginHelper.loginCheck(request, response);
 
         if (xxlUser != null) {
 
@@ -63,7 +63,7 @@ public class WebController {
             if (redirectUrl!=null && redirectUrl.trim().length()>0) {
 
                 String sessionId = SsoWebLoginHelper.getSessionIdByCookie(request);
-                String redirectUrlFinal = redirectUrl + "?" + Conf.SSO_SESSIONID + "=" + sessionId;;
+                String redirectUrlFinal = redirectUrl + "?" + Conf.SSO_SESSION_ID + "=" + sessionId;;
 
                 return "redirect:" + redirectUrlFinal;
             } else {
@@ -105,8 +105,8 @@ public class WebController {
         }
 
         // 1、make xxl-sso user
-        XxlSsoUser xxlUser = new XxlSsoUser();
-        xxlUser.setUserid(String.valueOf(result.getData().getUserid()));
+        SsoUser xxlUser = new SsoUser();
+        xxlUser.setUserId(String.valueOf(result.getData().getUserid()));
         xxlUser.setUsername(result.getData().getUsername());
         xxlUser.setVersion(UUID.randomUUID().toString().replaceAll("-", ""));
         xxlUser.setExpireMinute(SsoLoginStore.getRedisExpireMinute());
@@ -122,7 +122,7 @@ public class WebController {
         // 4、return, redirect sessionId
         String redirectUrl = request.getParameter(Conf.REDIRECT_URL);
         if (redirectUrl!=null && redirectUrl.trim().length()>0) {
-            String redirectUrlFinal = redirectUrl + "?" + Conf.SSO_SESSIONID + "=" + sessionId;
+            String redirectUrlFinal = redirectUrl + "?" + Conf.SSO_SESSION_ID + "=" + sessionId;
             return "redirect:" + redirectUrlFinal;
         } else {
             return "redirect:/";

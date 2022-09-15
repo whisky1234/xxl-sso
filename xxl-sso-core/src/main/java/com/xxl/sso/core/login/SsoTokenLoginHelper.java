@@ -2,7 +2,7 @@ package com.xxl.sso.core.login;
 
 import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.store.SsoLoginStore;
-import com.xxl.sso.core.user.XxlSsoUser;
+import com.xxl.sso.core.user.SsoUser;
 import com.xxl.sso.core.store.SsoSessionIdHelper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +18,14 @@ public class SsoTokenLoginHelper {
      * @param sessionId
      * @param xxlUser
      */
-    public static void login(String sessionId, XxlSsoUser xxlUser) {
+    public static void login(String sessionId, SsoUser xxlUser,Boolean ifRemember) {
 
         String storeKey = SsoSessionIdHelper.parseStoreKey(sessionId);
         if (storeKey == null) {
             throw new RuntimeException("parseStoreKey Fail, sessionId:" + sessionId);
         }
 
-        SsoLoginStore.put(storeKey, xxlUser);
+        SsoLoginStore.put(storeKey, xxlUser,ifRemember);
     }
 
     /**
@@ -48,7 +48,7 @@ public class SsoTokenLoginHelper {
      * @param request
      */
     public static void logout(HttpServletRequest request) {
-        String headerSessionId = request.getHeader(Conf.SSO_SESSIONID);
+        String headerSessionId = request.getHeader(Conf.SSO_SESSION_ID);
         logout(headerSessionId);
     }
 
@@ -59,28 +59,28 @@ public class SsoTokenLoginHelper {
      * @param sessionId
      * @return
      */
-    public static XxlSsoUser loginCheck(String  sessionId){
+    public static SsoUser loginCheck(String  sessionId){
 
         String storeKey = SsoSessionIdHelper.parseStoreKey(sessionId);
         if (storeKey == null) {
             return null;
         }
 
-        XxlSsoUser xxlUser = SsoLoginStore.get(storeKey);
-        if (xxlUser != null) {
-            String version = SsoSessionIdHelper.parseVersion(sessionId);
-            if (xxlUser.getVersion().equals(version)) {
-
-                // After the expiration time has passed half, Auto refresh
-                if ((System.currentTimeMillis() - xxlUser.getExpireFreshTime()) > xxlUser.getExpireMinute()/2) {
-                    xxlUser.setExpireFreshTime(System.currentTimeMillis());
-                    SsoLoginStore.put(storeKey, xxlUser);
-                }
-
-                return xxlUser;
-            }
-        }
-        return null;
+        SsoUser xxlUser = SsoLoginStore.get(storeKey);
+//        if (xxlUser != null) {
+//            String version = SsoSessionIdHelper.parseVersion(sessionId);
+//            if (xxlUser.getVersion().equals(version)) {
+//
+//                // After the expiration time has passed half, Auto refresh
+//                if ((System.currentTimeMillis() - xxlUser.getExpireFreshTime()) > xxlUser.getExpireMinute()/2) {
+//                    xxlUser.setExpireFreshTime(System.currentTimeMillis());
+//                    SsoLoginStore.put(storeKey, xxlUser);
+//                }
+//
+//                return xxlUser;
+//            }
+//        }
+        return xxlUser;
     }
 
 
@@ -90,8 +90,8 @@ public class SsoTokenLoginHelper {
      * @param request
      * @return
      */
-    public static XxlSsoUser loginCheck(HttpServletRequest request){
-        String headerSessionId = request.getHeader(Conf.SSO_SESSIONID);
+    public static SsoUser loginCheck(HttpServletRequest request){
+        String headerSessionId = request.getHeader(Conf.SSO_SESSION_ID);
         return loginCheck(headerSessionId);
     }
 

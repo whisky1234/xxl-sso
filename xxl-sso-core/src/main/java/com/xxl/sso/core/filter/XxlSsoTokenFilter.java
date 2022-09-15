@@ -4,7 +4,7 @@ import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.entity.ReturnT;
 import com.xxl.sso.core.login.SsoTokenLoginHelper;
 import com.xxl.sso.core.path.impl.AntPathMatcher;
-import com.xxl.sso.core.user.XxlSsoUser;
+import com.xxl.sso.core.user.SsoUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +78,7 @@ public class XxlSsoTokenFilter extends HttpServlet implements Filter {
         }
 
         // login filter
-        XxlSsoUser xxlUser = SsoTokenLoginHelper.loginCheck(req);
+        SsoUser xxlUser = SsoTokenLoginHelper.loginCheck(req);
         if (xxlUser == null) {
 
             // response

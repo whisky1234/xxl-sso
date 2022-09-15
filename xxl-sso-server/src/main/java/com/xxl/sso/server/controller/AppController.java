@@ -2,7 +2,7 @@ package com.xxl.sso.server.controller;
 
 import com.xxl.sso.core.login.SsoTokenLoginHelper;
 import com.xxl.sso.core.store.SsoLoginStore;
-import com.xxl.sso.core.user.XxlSsoUser;
+import com.xxl.sso.core.user.SsoUser;
 import com.xxl.sso.core.store.SsoSessionIdHelper;
 import com.xxl.sso.server.core.model.UserInfo;
 import com.xxl.sso.server.core.result.ReturnT;
@@ -45,8 +45,8 @@ public class AppController {
         }
 
         // 1、make xxl-sso user
-        XxlSsoUser xxlUser = new XxlSsoUser();
-        xxlUser.setUserid(String.valueOf(result.getData().getUserid()));
+        SsoUser xxlUser = new SsoUser();
+        xxlUser.setUserId(String.valueOf(result.getData().getUserid()));
         xxlUser.setUsername(result.getData().getUsername());
         xxlUser.setVersion(UUID.randomUUID().toString().replaceAll("-", ""));
         xxlUser.setExpireMinute(SsoLoginStore.getRedisExpireMinute());
@@ -57,7 +57,7 @@ public class AppController {
         String sessionId = SsoSessionIdHelper.makeSessionId(xxlUser);
 
         // 3、login, store storeKey
-        SsoTokenLoginHelper.login(sessionId, xxlUser);
+        SsoTokenLoginHelper.login(sessionId, xxlUser,false);
 
         // 4、return sessionId
         return new ReturnT<String>(sessionId);
@@ -86,14 +86,14 @@ public class AppController {
      */
     @RequestMapping("/logincheck")
     @ResponseBody
-    public ReturnT<XxlSsoUser> logincheck(String sessionId) {
+    public ReturnT<SsoUser> logincheck(String sessionId) {
 
         // logout
-        XxlSsoUser xxlUser = SsoTokenLoginHelper.loginCheck(sessionId);
+        SsoUser xxlUser = SsoTokenLoginHelper.loginCheck(sessionId);
         if (xxlUser == null) {
-            return new ReturnT<XxlSsoUser>(ReturnT.FAIL_CODE, "sso not login.");
+            return new ReturnT<SsoUser>(ReturnT.FAIL_CODE, "sso not login.");
         }
-        return new ReturnT<XxlSsoUser>(xxlUser);
+        return new ReturnT<SsoUser>(xxlUser);
     }
 
 }

@@ -236,7 +236,7 @@ xxl.sso.redis.address=redis://xxl-sso:password@127.0.0.1:6379/0
         - code：200 表示成功、其他失败
         - msg：错误提示
         - data：登陆用户信息
-            - userid：用户ID
+            - userId：用户ID
             - username：用户名
 
 ### 3.2 部署 "单点登陆Client端接入示例项目" (Token方式)
