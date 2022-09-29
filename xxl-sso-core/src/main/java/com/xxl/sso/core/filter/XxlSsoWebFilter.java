@@ -86,6 +86,7 @@ public class XxlSsoWebFilter extends HttpServlet implements Filter {
             if (isJson) {
 
                 // json msg
+                res.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
                 res.setContentType("application/json;charset=utf-8");
                 res.getWriter().println("{\"code\":"+Conf.SSO_LOGIN_FAIL_RESULT.getCode()+", \"msg\":\""+ Conf.SSO_LOGIN_FAIL_RESULT.getMsg() +"\"}");
                 return;

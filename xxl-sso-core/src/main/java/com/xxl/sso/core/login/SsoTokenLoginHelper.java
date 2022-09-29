@@ -25,7 +25,7 @@ public class SsoTokenLoginHelper {
             throw new RuntimeException("parseStoreKey Fail, sessionId:" + sessionId);
         }
 
-        SsoLoginStore.put(storeKey, xxlUser,ifRemember);
+        SsoLoginStore.put(sessionId, xxlUser,ifRemember);
     }
 
     /**
@@ -40,7 +40,7 @@ public class SsoTokenLoginHelper {
             return;
         }
 
-        SsoLoginStore.remove(storeKey);
+        SsoLoginStore.remove(sessionId);
     }
     /**
      * client logout
@@ -65,9 +65,7 @@ public class SsoTokenLoginHelper {
         if (storeKey == null) {
             return null;
         }
-
-        SsoUser xxlUser = SsoLoginStore.get(storeKey);
-//        if (xxlUser != null) {
+        //        if (xxlUser != null) {
 //            String version = SsoSessionIdHelper.parseVersion(sessionId);
 //            if (xxlUser.getVersion().equals(version)) {
 //
@@ -80,7 +78,7 @@ public class SsoTokenLoginHelper {
 //                return xxlUser;
 //            }
 //        }
-        return xxlUser;
+        return SsoLoginStore.get(sessionId);
     }
 
 

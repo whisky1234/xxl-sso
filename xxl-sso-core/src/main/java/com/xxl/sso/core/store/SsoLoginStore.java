@@ -27,16 +27,15 @@ public class SsoLoginStore {
     /**
      * get
      *
-     * @param storeKey
+     * @param sessionId
      * @return
      */
-    public static SsoUser get(String storeKey) {
+    public static SsoUser get(String sessionId) {
 
-        String redisKey    = redisKey(storeKey);
+        String redisKey    = redisKey(sessionId);
         Object objectValue = JedisUtil.getObjectValue(redisKey);
         if (objectValue != null) {
-            SsoUser xxlUser = (SsoUser) objectValue;
-            return xxlUser;
+            return (SsoUser) objectValue;
         }
         return null;
     }
@@ -44,21 +43,21 @@ public class SsoLoginStore {
     /**
      * remove
      *
-     * @param storeKey
+     * @param sessionId
      */
-    public static void remove(String storeKey) {
-        String redisKey = redisKey(storeKey);
+    public static void remove(String sessionId) {
+        String redisKey = redisKey(sessionId);
         JedisUtil.del(redisKey);
     }
 
     /**
      * put
      *
-     * @param storeKey
+     * @param sessionId
      * @param xxlUser
      */
-    public static void put(String storeKey, SsoUser xxlUser, Boolean ifRemember) {
-        String redisKey = redisKey(storeKey);
+    public static void put(String sessionId, SsoUser xxlUser, Boolean ifRemember) {
+        String redisKey = redisKey(sessionId);
         JedisUtil.setObjectValue(redisKey, xxlUser, ifRemember ? redisExpireMinute * 60 : 1440 * 60);  // minute to second
     }
 

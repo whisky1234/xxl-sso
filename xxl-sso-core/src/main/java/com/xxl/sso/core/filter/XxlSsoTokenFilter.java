@@ -3,6 +3,7 @@ package com.xxl.sso.core.filter;
 import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.entity.ReturnT;
 import com.xxl.sso.core.login.SsoTokenLoginHelper;
+import com.xxl.sso.core.login.SsoWebLoginHelper;
 import com.xxl.sso.core.path.impl.AntPathMatcher;
 import com.xxl.sso.core.user.SsoUser;
 import org.slf4j.Logger;
@@ -78,11 +79,11 @@ public class XxlSsoTokenFilter extends HttpServlet implements Filter {
         }
 
         // login filter
-        SsoUser xxlUser = SsoTokenLoginHelper.loginCheck(req);
+        SsoUser xxlUser = SsoWebLoginHelper.loginCheck(req,res);
         if (xxlUser == null) {
 
             // response
-            res.setStatus(HttpServletResponse.SC_OK);
+            res.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
             res.setContentType("application/json;charset=UTF-8");
             res.getWriter().println("{\"code\":"+Conf.SSO_LOGIN_FAIL_RESULT.getCode()+", \"msg\":\""+ Conf.SSO_LOGIN_FAIL_RESULT.getMsg() +"\"}");
             return;

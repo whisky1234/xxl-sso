@@ -32,7 +32,7 @@ public class SsoWebLoginHelper {
             throw new RuntimeException("parseStoreKey Fail, sessionId:" + sessionId);
         }
 
-        SsoLoginStore.put(storeKey, xxlUser,ifRemember);
+        SsoLoginStore.put(sessionId, xxlUser,ifRemember);
         CookieUtil.set(response, Conf.SSO_SESSION_ID, sessionId, ifRemember);
     }
 
@@ -52,7 +52,7 @@ public class SsoWebLoginHelper {
 
         String storeKey = SsoSessionIdHelper.parseStoreKey(cookieSessionId);
         if (storeKey != null) {
-            SsoLoginStore.remove(storeKey);
+            SsoLoginStore.remove(cookieSessionId);
         }
 
         CookieUtil.remove(request, response, Conf.SSO_SESSION_ID);
