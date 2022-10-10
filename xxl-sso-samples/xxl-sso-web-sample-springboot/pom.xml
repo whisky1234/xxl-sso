@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.xuxueli</groupId>
+        <groupId>com.bc360pai</groupId>
         <artifactId>xxl-sso-samples</artifactId>
         <version>1.1.1</version>
     </parent>
@@ -45,7 +45,7 @@
 
         <!-- xxl-sso-core -->
         <dependency>
-            <groupId>com.xuxueli</groupId>
+          <groupId>com.bc360pai</groupId>
             <artifactId>xxl-sso-core</artifactId>
             <version>${parent.version}</version>
         </dependency>
